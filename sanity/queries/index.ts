@@ -52,7 +52,22 @@ const getLatestBlogs = async () => {
 const getDealProducts = async (): Promise<Product[]> => {
   try {
     const { data } = await sanityFetch({ query: DEAL_PRODUCTS });
-    return data ?? [];
+
+    if (!data) return [];
+
+    // Map categories to the proper type
+    const products: Product[] = data.map((item: any) => ({
+      ...item,
+      categories: item.categories
+        ? item.categories.map((title: string | null, idx: number) => ({
+            _ref: title || "",
+            _type: "reference",
+            _key: `${item._id}-cat-${idx}`,
+          }))
+        : undefined,
+    }));
+
+    return products;
   } catch (error) {
     console.error("Sanity error:", error as any);
     return [];

@@ -2,13 +2,12 @@ import { Product } from "@/sanity.types";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
-const FavouriteButton = ({
-  showProduct = false,
-  product,
-}: {
+type Props = {
   showProduct?: boolean;
-  product: Product | null | undefined;
-}) => {
+  product?: Product | null;
+};
+
+const FavouriteButton = ({ showProduct = false, product }: Props) => {
   return (
     <>
       {!showProduct ? (
@@ -19,7 +18,7 @@ const FavouriteButton = ({
           </span>
         </Link>
       ) : (
-        <button className="group relative  hoverEffect border border-shop_light_green/80 hover:bg-shop_light_green p-1.5 rounded-sm hover:text-white">
+        <button className="group relative hoverEffect border border-shop_light_green/80 hover:bg-shop_light_green p-1.5 rounded-sm hover:text-white">
           <Heart />
         </button>
       )}
