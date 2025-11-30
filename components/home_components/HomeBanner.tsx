@@ -1,3 +1,4 @@
+"use client";
 import { Title } from "../ui/text";
 import Link from "next/link";
 import Image from "next/image";
